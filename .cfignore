@@ -1,0 +1,6 @@
+playground/
+tests/
+pytest_coverage.py
+.coverage
+.coveragerc
+

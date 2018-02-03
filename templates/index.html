@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <script type="text/javascript">
+        function validateForm()
+        {
+            var formlst = ["spot", "strike", "rate", "expiry", "vol"];
+            var idx;
+            for (idx in formlst)
+            {
+                var x = document.forms["pricingForm"][parseInt(idx) + 2].value;
+                if (x == null || x == "")
+                {
+                    alert(formlst[idx] + " must be filled out");
+                    return false;
+                }
+            }
+        }
+    </script>
+  </head>
+  <body>
+    <p><h1>Welcome to Yilu's Quant World</h1></p>
+    <p><h3>Email: yilu.nick.zhu@gmail.com</h3></p>
+    <p><h3>Option Pricing</h3></p>
+
+    <form name="pricingForm" action="/pricing" onsubmit="return validateForm()" method="post">
+      <p>
+        <input type="radio" name="option_type" value="call" checked />Call
+        <input type="radio" name="option_type" value="put"  />Put
+      </p>
+      spot price: <input type="text" name="spot" value="60" /><br />
+      strike price: <input type="text" name="strike" value="65" /><br />
+      risk-free interest rate: <input type="text" name="rate" value="0.08" /><br />
+      expiry in years: <input type="text" name="expiry" value="0.25" /><br />
+      volatility: <input type="text" name="vol" value="0.3" /><br />
+      cost of carry rate: <input type="text" name="coc" /> (This doesn't work with Binomial Trees at the moment and will be ignored)<br />
+      <p>
+        <input type="radio" name="pricing_method" value="formula" checked />Black Scholes Formula<br />
+        <input type="radio" name="pricing_method" value="bitree" />Binomial Trees
+                                                                    <input type="text" name="bt_step_num" /> steps (max 2,000)<br />
+        <input type="radio" name="pricing_method" value="simulation" />Monte Carlo Simulation
+                                                                    <input type="text" name="mc_simu_num" /> runs (max 4,000,000)<br />
+      </p>
+      <p><input type="submit" name="pricing_method" value="Calculate" /></p>
+
+      NOTE: <br/>
+        Monte Carlo Simulation takes fairly long time to finish (running 4 million times takes about 55 seconds) so please be patient.<br/>
+
+    </form>
+
+
+
+    <p><h3>Option Prices Plotting</h3></p>
+      <form name="plottingForm" action="/plotting" method="post">
+        <p>
+          <input type="radio" name="view_plot" value="formula" checked />
+                    Use Black-Scholes formula to plot diagrams which show
+                    <BLOCKQUOTE>
+                      option price vs expiry <br />
+                      option price vs strike price <br />
+                      option price vs spot price <br />
+                      option price vs volatility
+                    </BLOCKQUOTE>
+          <input type="radio" name="view_plot" value="greek" />
+                    Use Black-Scholes formula to plot 3D diagrams which show <br />
+                    <BLOCKQUOTE>
+                      greek delta vs spot price vs days to maturity.
+                    </BLOCKQUOTE>
+          <input type="radio" name="view_plot" value="bitree" />Show how prices calculated by Binomial Trees change with steps increasing. <br />
+        </p>
+        <p><input type="submit" name="view_plot" value="View" /></p>
+    </form>
+
+  </body>
+</html>

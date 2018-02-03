@@ -1,0 +1,16 @@
+---
+buildpack: python_buildpack
+env:
+  # TCL and TK for tkinter which is used by matplotlib
+  TCL_LIBRARY:  /home/vcap/deps/0/python/usr/share/tcltk/tcl8.6/
+  TK_LIBRARY:   /home/vcap/deps/0/python/usr/share/tcltk/tk8.6/
+applications:
+- name:         quant
+  memory:       512M
+  disk_quota:   1G
+  instances:    1
+  command:      gunicorn run:app
+- name:         testrun
+  memory:       64M
+  disk_quota:   512M
+  command:      gunicorn test_run:app
