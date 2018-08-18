@@ -20,6 +20,7 @@
   <body>
     <p><h1>Welcome to Yilu's Quant World</h1></p>
     <p><h3>Email: yilu.nick.zhu@gmail.com</h3></p>
+    <div id="like_button_container"></div>
     <p><h3>Option Pricing</h3></p>
 
     <form name="pricingForm" action="/pricing" onsubmit="return validateForm()" method="post">
@@ -70,5 +71,11 @@
         <p><input type="submit" name="view_plot" value="View" /></p>
     </form>
 
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <!-- Load our React component. -->
+    <script src="{{ url_for('static', filename='js/like_button.js') }}"></script>
   </body>
 </html>

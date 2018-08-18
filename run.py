@@ -24,7 +24,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    print('cwd', os.getcwd(), 'list dir', os.listdir('.'))
     return render_template('index.html')
 
 

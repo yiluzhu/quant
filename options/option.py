@@ -24,6 +24,11 @@ class Option:
         if not self.cost_of_carry and product in product_coc_map:
             self.cost_of_carry = product_coc_map[product]
 
+    def overwrite(self, **kwargs):
+        for attr, value in kwargs.items():
+            if value is not None:
+                setattr(self, attr, value)
+
 
 class OptionType(Enum):
     CALL = 0
